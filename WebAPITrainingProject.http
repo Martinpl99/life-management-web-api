@@ -1,0 +1,17 @@
+@WebAPITrainingProject_HostAddress = http://localhost:5010
+
+GET {{WebAPITrainingProject_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+### Create a New Product
+POST {{WebAPITrainingProject_HostAddress}}/api/employee
+Content-Type: application/json
+
+{
+    "Name": "New Product",
+    "Price": 39.99,
+    "Category": "Books"
+}
+###
