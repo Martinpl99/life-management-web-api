@@ -2,11 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using MyFirstWebAPIProject.Dto;
 using WebAPITrainingProject.Services.Interfaces;
 
-namespace MyApp.Namespace
+namespace MyApp.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public sealed class UserController : ControllerBase
     {
         private readonly IUserService _userService;
         public UserController(IUserService userService)
@@ -30,7 +30,7 @@ namespace MyApp.Namespace
             var result = await _userService.GetUserById(id);
 
             return result.IsSuccess
-            ? Ok(result)
+            ? Ok(result.Value)
             : BadRequest();
         }
     }

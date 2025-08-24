@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using MyFirstWebAPIProject.Database.Models.Entities;
 
 namespace MyFirstWebAPIProject.Database.DatabaseContext;
@@ -8,6 +9,7 @@ public interface IApplicationDbContext
 {
     DbSet<User> Users { get; set; }
     DbSet<UserAddress> UsersAddresses { get; set; }
+    DatabaseFacade Database { get; }
     Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     int SaveChanges();
     EntityEntry<TEntity> Update<TEntity>(TEntity entity) where TEntity : class;

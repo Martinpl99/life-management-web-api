@@ -12,6 +12,8 @@ public class AutomapperProfiles : Profile
         CreateMap<UserCreateDto, User>().ReverseMap();
         CreateMap<UserGetDto, User>().ReverseMap();
 
-        CreateMap<UserAddressGetDto, UserAddress>().ReverseMap();
+        //UserAddress
+        CreateMap<UserAddressCreateDto, UserAddress>().ReverseMap();
+        CreateMap<UserAddress, UserAddressGetDto>().ReverseMap();
     }
 }

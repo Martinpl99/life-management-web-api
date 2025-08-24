@@ -4,6 +4,8 @@ VisualStudioVersion = 17.5.2.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebAPITrainingProject", "WebAPITrainingProject.csproj", "{4A7F3197-47E4-7366-B263-3459B819051B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LifeManagementAPISharedModels", "..\LifeManagementAPISharedModels\LifeManagementAPISharedModels\LifeManagementAPISharedModels.csproj", "{DC9F95E3-7FEC-403C-3E8C-DFA27184DDB1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,6 +16,10 @@ Global
 		{4A7F3197-47E4-7366-B263-3459B819051B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A7F3197-47E4-7366-B263-3459B819051B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A7F3197-47E4-7366-B263-3459B819051B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC9F95E3-7FEC-403C-3E8C-DFA27184DDB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC9F95E3-7FEC-403C-3E8C-DFA27184DDB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC9F95E3-7FEC-403C-3E8C-DFA27184DDB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC9F95E3-7FEC-403C-3E8C-DFA27184DDB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

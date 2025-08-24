@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MyFirstWebAPIProject.Database.DatabaseContext;
 using ReturnTypeAndStatusCodes.Models;
 using Serilog;
+using WebAPITrainingProject.CommonUtils;
 using WebAPITrainingProject.Services.Implementation;
 using WebAPITrainingProject.Services.Interfaces;
 
@@ -43,6 +44,8 @@ builder.Services.AddControllers(options =>
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped(typeof(ICommonOperations<>), typeof(CommonOperations<>));
+builder.Services.AddScoped<IUserAddressService, UserAddressService>();
 #endregion
 
 builder.Host.UseDefaultServiceProvider(options =>
@@ -52,7 +55,6 @@ builder.Host.UseDefaultServiceProvider(options =>
 });
 
 var app = builder.Build();
-
 
 //Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
