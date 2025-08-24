@@ -19,8 +19,6 @@ public sealed class UserAddressService : IUserAddressService
 
     public async Task<Result<UserAddressGetDto>> CreateUserAddressesAsync(UserAddressCreateDto userAddressCreateDto)
     {
-        using var transaction = await _commonOper.DbContext.Database.BeginTransactionAsync();
-
         try
         {
             var user = await _commonOper.DbContext.Users.FindAsync(userAddressCreateDto.UserId);
@@ -42,15 +40,15 @@ public sealed class UserAddressService : IUserAddressService
 
             var createdUserAddress = await _commonOper.DbContext.UsersAddresses.AddAsync(userAddressToCreate);
 
-            if(createdUserAddress == null)
+            if (createdUserAddress == null)
             {
-                await transaction.RollbackAsync();
+                _commonOper.Logger.LogError("Cannot create user address");
                 return Result.Fail("Cannot create user address");
             }
 
             var mappedUserAddress = _commonOper.Mapper.Map<UserAddressGetDto>(createdUserAddress.Entity);
 
-            await transaction.CommitAsync();
+            await _commonOper.DbContext.SaveChangesAsync();
             return Result.Ok(mappedUserAddress);
         }
         catch (AutoMapperMappingException ex)
@@ -63,7 +61,6 @@ public sealed class UserAddressService : IUserAddressService
         }
         catch (Exception ex)
         {
-            await transaction.RollbackAsync();
             _commonOper.Logger.LogError(ex, "Cannot to create to UserAddress");
             return Result.Fail("Cannot to create to UserAddress");
         }
