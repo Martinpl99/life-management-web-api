@@ -25,9 +25,19 @@ namespace MyApp.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserGetDto>> GetUserById([FromRoute] Guid id)
+        public async Task<ActionResult<UserGetDto>> GetUserByIdAsync([FromRoute] Guid id)
         {
-            var result = await _userService.GetUserById(id);
+            var result = await _userService.GetUserByIdAsync(id);
+
+            return result.IsSuccess
+            ? Ok(result.Value)
+            : BadRequest();
+        }
+
+        [HttpPut("{userId}")]
+        public async Task<ActionResult<UserGetDto>> UpdateUserAsync(Guid userId, UserUpdateDto userUpdateDto)
+        {
+            var result = await _userService.UpdateUserAsync(userId, userUpdateDto);
 
             return result.IsSuccess
             ? Ok(result.Value)

@@ -53,7 +53,7 @@ public sealed class UserAddressService : IUserAddressService
         }
         catch (AutoMapperMappingException ex)
         {
-            _commonOper.Logger.LogError(ex, "B³¹d mapowania");
+            _commonOper.Logger.LogError(ex, "ProblemWithMapping");
 
             return Result.Fail(new Error("B³¹d mapowania")
                          .WithMetadata("ErrorCode",
@@ -69,5 +69,27 @@ public sealed class UserAddressService : IUserAddressService
     public Task<UserAddressGetDto> GetAddressByUserIdAsync(Guid userId)
     {
         throw new NotImplementedException();
+    }
+
+    public async Task<Result<UserAddressGetDto>> UpdateAddressByUserIdAsync(Guid userId, UserAddressUpdateDto userAddressUpdateDto)
+    {
+        if(userAddressUpdateDto is null) return Result.Fail("Cannot update UserAddress");
+
+        try
+        {
+            var userAddresFromDb = await _commonOper.DbContext.UsersAddresses
+                .FirstAsync(x => x.UserId == userId);
+
+            _commonOper.Mapper.Map(userAddressUpdateDto, userAddresFromDb);
+
+            await _commonOper.DbContext.SaveChangesAsync();
+
+            return Result.Ok(_commonOper.Mapper.Map<UserAddressGetDto>(userAddresFromDb));
+        }
+        catch(Exception ex) 
+        {
+            _commonOper.Logger.LogError(ex, "Cannot update UserAddress");
+            return Result.Fail("Cannot update UserAddress");
+        }
     }
 }

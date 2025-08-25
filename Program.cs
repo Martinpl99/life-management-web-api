@@ -35,7 +35,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers(options =>
 {
-    options.Filters.Add(new HttpMethodFilter(new List<string> {"GET", "POST", "DELETE"}));
+    options.Filters.Add(new HttpMethodFilter(new List<string> {"GET", "POST", "DELETE", "PUT"}));
 });
 
 #endregion
